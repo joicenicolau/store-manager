@@ -17,4 +17,8 @@ const getProductsById = async (id) => {
   return result;
 };
 
+// const createProduct = async () => {
+
+// };
+
 module.exports = { getAllProducts, getProductsById };

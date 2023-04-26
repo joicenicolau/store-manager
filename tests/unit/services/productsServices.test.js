@@ -17,19 +17,15 @@ describe('Camada Service', function () {
       expect(response).to.be.a('array');
       expect(response).to.be.deep.equal(products);
     }); 
-  });
-
-  describe('Caso de sucesso de retorno de todos os produtos pelo Id', function () {
-    afterEach(()  => sinon.restore());
 
     it('testa se retorna um objeto de todos os produtos pelo Id', async function () {
       sinon.stub(productModel, 'getProductsById').resolves(products[0]);
-
+  
       const payload = 1
-
+  
       const response = await productService.getProductsById(payload);
-      console.log(response)
-      expect(response).to.be.deep.equal(products[0]);
-    }); 
+      
+      expect(response).to.be.deep.equal(products[ 0 ]);
+    });
   });
 });
