@@ -6,9 +6,17 @@ const productName = Joi.string().min(5).required();
 const validateName = (name) => {
   const { error } = productName.validate(name);
 
-  if (error.message === '"name" is required') {
-    return { type: 400, message: error.message('name') };
+  if (error.message === '"value" is required') {
+    return {
+      type: 400, message: error.message.replace('value', 'name') };
   }
+
+  if (error.message === '"value" length must be at least 5 characters long') {
+    return {
+      type: 422, message: error.message.replace('value', 'name') };
+    }
+  
+  return { type: null, message: '' };
 };
 
 module.exports = {
