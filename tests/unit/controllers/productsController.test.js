@@ -60,6 +60,7 @@ describe('Camada Controller', function () {
       
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
+      sinon.stub(productService, 'getProductsById').resolves(products[0]);
       
       await productController.getProductsById(req, res);
 
