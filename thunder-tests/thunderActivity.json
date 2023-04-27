@@ -50,9 +50,14 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2023-04-26T18:55:22.348Z",
-    "modified": "2023-04-27T21:02:00.988Z",
+    "modified": "2023-04-27T21:43:12.728Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[]",
+      "form": []
+    },
     "tests": []
   },
   {

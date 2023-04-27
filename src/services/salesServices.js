@@ -1,16 +1,14 @@
 const salesModels = require('../models/salesModel');
 const productModels = require('../models/productsModels');
 
+// refatoração da validação do id. Sem o forEach. Resolvi utilizar o some, para tornar padrão com as outras validações
 const productArray = async (prod) => {
   const products = (await productModels.getAllProducts()).map((e) => e.id);
-  let result = {};
-
-  prod.forEach((e) => {
-    if (!products.includes(e.productId)) {
-      result = { type: 404, message: 'Product not found' };
-    }
-  });
-  return result;
+  const notFound = prod.some((e) => !products.includes(e.productId));
+  if (notFound) {
+    return { type: 404, message: 'Product not found' };
+  }
+  return {};
 };
 
 const addSales = async (sale) => {
