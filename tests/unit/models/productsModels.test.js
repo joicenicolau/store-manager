@@ -19,7 +19,7 @@ describe('Camada Model', function () {
         },
       ];
 
-      sinon.stub(connection, 'execute').resolves(execute);
+      sinon.stub(connection, 'execute').resolves([execute]);
     });
 
     afterEach(async function () {
