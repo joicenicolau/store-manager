@@ -31,6 +31,7 @@ const getAllSales = async () => {
   return result;
 };
 
+// retirei a sale_id do select, teste estava pedindo
 const getSalesById = async (id) => {
   const [result] = await connection.execute(
     `SELECT 

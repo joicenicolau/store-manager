@@ -16,8 +16,14 @@ const createProducts = async (name) => {
   return { type: null, message: { id: result, name } };
 };
 
+const updateProducts = async (id, name) => {
+  const result = await productModels.updateProducts(id, name);
+  return result; 
+};
+
 module.exports = {
   getAllProducts,
   getProductsById,
   createProducts,
+  updateProducts,
 };

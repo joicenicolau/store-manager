@@ -27,8 +27,18 @@ const createProducts = async (name) => {
   return insertId;
 };
 
+// pesquisa: course - 2.4
+const updateProducts = async (id, name) => {
+  await connection.execute(
+    'UPDATE StoreManager.products SET name = (?) WHERE id = (?);',
+    [name, id],
+  );
+  return { id, name };
+};
+
 module.exports = {
   getAllProducts,
   getProductsById,
   createProducts,
+  updateProducts,
 };

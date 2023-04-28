@@ -25,8 +25,26 @@ const createProducts = async (req, res) => {
   return res.status(201).json(result.message);
 };
 
+const updateProducts = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  // valida se um produto específico não é encontrado
+  const resultByID = await productService.getProductsById(id);
+  
+  if (!resultByID) return res.status(404).json({ message: 'Product not found' });
+  
+  // validação já pronta
+  const result = await productService.updateProducts(id, name);
+  
+  if (result.type) return res.status(result.type).json({ message: result.message });
+
+  return res.status(200).json(result);
+};
+
 module.exports = {
   getAllProducts,
   getProductsById,
   createProducts,
+  updateProducts,
 };
