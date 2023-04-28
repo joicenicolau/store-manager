@@ -33,7 +33,7 @@ const updateProducts = async (id, name) => {
     'UPDATE StoreManager.products SET name = (?) WHERE id = (?);',
     [name, id],
   );
-  return { id, name };
+  return { id, name }; // retornar direto o id e name. 
 };
 
 module.exports = {

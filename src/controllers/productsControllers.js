@@ -22,6 +22,8 @@ const createProducts = async (req, res) => {
 
   const result = await productService.createProducts(name);
 
+  if (result.type) return res.status(result.type).json({ message: result.message });
+  
   return res.status(201).json(result.message);
 };
 
@@ -31,10 +33,12 @@ const updateProducts = async (req, res) => {
 
   // valida se um produto específico não é encontrado
   const resultByID = await productService.getProductsById(id);
+  // console.log(resultByID);
   
+  // esse diferente da sale aceitou a negação
   if (!resultByID) return res.status(404).json({ message: 'Product not found' });
   
-  // validação já pronta
+  // validação já pronta no middleware
   const result = await productService.updateProducts(id, name);
   
   if (result.type) return res.status(result.type).json({ message: result.message });

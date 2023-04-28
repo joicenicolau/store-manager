@@ -43,6 +43,7 @@ const getSalesById = async (id) => {
     WHERE ps.sale_id = ?;`,
     [id],
   );
+  // console.log('linha 46', result); 
   return result;
 };
 

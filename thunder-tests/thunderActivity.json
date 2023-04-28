@@ -32,13 +32,18 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:3001/products",
-    "url": "localhost:3001/products",
-    "method": "GET",
+    "url": "localhost:3001/sales",
+    "method": "POST",
     "sortNum": 0,
     "created": "2023-04-26T18:48:49.488Z",
-    "modified": "2023-04-26T18:48:49.488Z",
+    "modified": "2023-04-28T22:06:56.932Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": " {\n    \"productId\": 3,\n    \"quantity\": 1\n  },",
+      "form": []
+    },
     "tests": []
   },
   {
@@ -46,16 +51,16 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:3001/products/1",
-    "url": "localhost:3001/sales",
+    "url": "localhost:3001/products",
     "method": "POST",
     "sortNum": 0,
     "created": "2023-04-26T18:55:22.348Z",
-    "modified": "2023-04-27T21:43:12.728Z",
+    "modified": "2023-04-28T21:39:29.893Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[]",
+      "raw": "{\n  \"name\": \"Varinha\"\n}",
       "form": []
     },
     "tests": []

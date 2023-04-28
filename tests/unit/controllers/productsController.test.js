@@ -9,7 +9,7 @@ const { expect } = chai;
 
 const productController = require('../../../src/controllers/productsControllers');
 const productService = require('../../../src/services/productsServices');
-const { products } = require('./mock/products.controller.mock');
+const { products } = require('../../mocks/products.mock');
 
 describe('Camada Controller', function () {
   describe('Caso de sucesso de retorno de todos os produtos', function () {
@@ -66,6 +66,23 @@ describe('Camada Controller', function () {
 
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(products[0]);
+    });
+
+    it('deve testar a função createProducts', async function () {
+      const req = {
+        body: { name: 'Varinha' },
+      };
+      
+      const res = {};
+      
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon.stub(productService, 'createProducts').resolves({ type: null, message: { id: 1, name: 'Varinha' } });
+      
+      await productController.createProducts(req, res);
+
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith({ id: 1, name: 'Varinha' });
     });
   });
 });

@@ -3,79 +3,46 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../src/models/connections');
 const productModel = require('../../../src/models/productsModels');
+const { products } = require('../../mocks/products.mock');
 
 describe('Camada Model', function () {
   describe('Lista todas os produtos', function () {
-
-    beforeEach(async function () {
-      const execute = [
-        {
-          "id": 1,
-          "name": "Martelo de Thor"
-        },
-        {
-          "id": 2,
-          "name": "Traje de encolhimento"
-        },
-      ];
-
-      sinon.stub(connection, 'execute').resolves([execute]);
-    });
-
-    afterEach(async function () {
-      connection.execute.restore();
-    });
+    afterEach(() => sinon.restore());
 
     it('testa retorno dos produtos', async function () {
-      const expected = [
-        {
-          "id": 1,
-          "name": "Martelo de Thor"
-        },
-        {
-          "id": 2,
-          "name": "Traje de encolhimento"
-        },
-      ];
-
+      sinon.stub(connection, 'execute').resolves([products]);
+      
       const response = await productModel.getAllProducts();
 
       expect(response).to.be.a('array');
-      expect(response).to.be.deep.equal(expected);
+      expect(response).to.be.deep.equal(products);
     });
-  });
-
-  describe('Lista produtos pelo Id', function () {
-    before(async function () {
-    const execute = [
-      {
-        "id": 1,
-        "name": "Martelo de Thor"
-      },
-      {
-        "id": 2,
-        "name": "Traje de encolhimento"
-      },
-    ];
-
-      sinon.stub(connection, 'execute').resolves([execute]);
-    });
-
-    after(async function () {
-      connection.execute.restore();
-    });
-
+    
     it('testa retorno dos produtos pelo Id', async function () {
-      const expected = {
-        "id": 1,
-        "name": "Martelo de Thor"
-      };
+      sinon.stub(connection, 'execute').resolves([products]);
+      
+      const response = await productModel.getProductsById(1);
+      
+      expect(response).to.be.equal(products[0]);
+    });
+    
+    it('testa se criou novos os produtos', async function () {
+      sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
+      
+      const response = await productModel.createProducts(products);
+      
+      expect(response).to.be.deep.equal(products[0].id);
+    });
 
-      const payload = 1
+    it('testa se atualizou os produtos', async function () {
+      const productId = 1;
+      const productName = 'Anel do poder';
 
-      const response = await productModel.getProductsById(payload);
+      sinon.stub(connection, 'execute').resolves({ affectedRows: 1 });
 
-      expect(response).to.be.deep.equal(expected);
+      const response = await productModel.updateProducts(productId, productName);
+
+      expect(response).to.be.deep.equal({ id: productId, name: productName });
     });
   });
 });
