@@ -41,8 +41,6 @@ const updateProducts = async (req, res) => {
   // validação já pronta no middleware
   const result = await productService.updateProducts(id, name);
   
-  if (result.type) return res.status(result.type).json({ message: result.message });
-
   return res.status(200).json(result);
 };
 

@@ -2,7 +2,6 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../src/models/connections');
 const salesModel = require('../../../src/models/salesModel');
-const productModel = require('../../../src/models/productsModels');
 const mock = require('../../mocks/sales.mock');
 
 describe('Camada Model', function () {
@@ -15,8 +14,8 @@ describe('Camada Model', function () {
       const response = await salesModel.getAllSales();
 
       expect(response[0]).to.have.property('saleId');
-      expect(response[ 0 ]).to.have.property('date');
-      expect(response[ 0 ]).to.have.property('productId');
+      expect(response[0]).to.have.property('date');
+      expect(response[0]).to.have.property('productId');
       expect(response[0]).to.have.property('quantity');
     });
 
@@ -31,9 +30,10 @@ describe('Camada Model', function () {
     it('testa se adiciona vendas novas', async function () {
       sinon.stub(connection, 'execute').resolves([{ insertId: 5 }]);
 
-      const response = await salesModel.addSales(mock.resultAddSales);
+      // alterei o arquivo mock, peguei outro que tem data
+      const response = await salesModel.addSales(mock.resultGetSales);
 
-      expect(response).to.deep.equal({ id: 5, itemsSold: mock.resultAddSales });
+      expect(response).to.deep.equal({ id: 5, itemsSold: mock.resultGetSales });
     });
   });
 });

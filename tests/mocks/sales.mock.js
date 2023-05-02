@@ -32,16 +32,15 @@ const resultGetSalesById = [
   }
 ];
 
-const resultAddSales = [
-  {
-    "productId": 3,
-    "quantity": 15
-  },
-  {
-    "productId": 4,
-    "quantity": 18
-  }
-];
+const resultAddSales = {
+  "id": 5,
+  "itemsSold": [
+    {
+      "productId": 3,
+      "quantity": 15
+    }
+  ]  
+};
 
 
 module.exports = {
