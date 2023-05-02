@@ -36,9 +36,18 @@ const updateProducts = async (id, name) => {
   return { id, name }; // retornar direto o id e name. 
 };
 
+const deleteProducts = async (id) => {
+  await connection.execute(
+    'DELETE FROM StoreManager.products WHERE id = (?);',
+    [id],
+  );
+  return { type: null };
+};
+
 module.exports = {
   getAllProducts,
   getProductsById,
   createProducts,
   updateProducts,
+  deleteProducts,
 };
