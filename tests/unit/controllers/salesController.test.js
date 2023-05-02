@@ -37,26 +37,26 @@ describe('Camada Controller', function () {
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
     });
 
-    // it('testa o retorno de sucesso da addSales', async function () {
-    //   const req = {
-    //     body: {
-    //       productId: 1,
-    //       quantity: 5
-    //     }
-    //   };
+    it('testa o retorno de sucesso da addSales', async function () {
+      const req = {
+        body: {
+          productId: 1,
+          quantity: 5
+        }
+      };
 
-    //   const res = {};
+      const res = {};
 
-    //   res.status = sinon.stub().returns(res);
-    //   res.json = sinon.stub().returns();
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
-    //   sinon.stub(salesService, 'addSales').resolves(mock.resultAddSales);
+      sinon.stub(salesService, 'addSales').resolves({ type: null, message: mock.resultAddSales });
 
-    //   await salesController.addSale(req, res);
+      await salesController.addSale(req, res);
 
-    //   expect(res.status).to.have.been.calledWith(201);
-    //   expect(res.json).to.have.been.calledWith(mock.resultAddSales);
-    // });
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith(mock.resultAddSales);
+    });
 
     it('testa a função getAllSales', async function () {
       const req = {};

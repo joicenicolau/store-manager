@@ -47,9 +47,7 @@ const updateProducts = async (req, res) => {
 const deleteProducts = async (req, res) => {
   const { id } = req.params;
 
-  const result = await productService.deleteProducts(id);
-
-  if (result.type) return res.status(result.type).json({ message: result.message });
+  await productService.deleteProducts(id);
 
   return res.sendStatus(204);
 };
