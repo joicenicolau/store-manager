@@ -5,8 +5,6 @@ const addSale = async (req, res) => {
 
   const sales = await salesServices.addSales(result);
 
-  // Será validado que não é possível realizar operações em uma venda com o campo `productId` inexistente, em um uinic array e em vários.
-  // Deixei genérico aqui e valido no middleware
   if (sales.type) return res.status(sales.type).json({ message: sales.message });
 
   return res.status(201).json(sales.message);
@@ -37,9 +35,21 @@ const deleteSale = async (req, res) => {
   return res.sendStatus(204);
 };
 
+const updateSales = async (req, res) => {
+  const { id } = req.params;
+  const result = await req.body;
+
+  const sales = await salesServices.updateSales(id, result);
+
+  if (sales.type) return res.status(sales.type).json({ message: sales.message });
+
+  return res.status(200).json({ saleId: id, itemsUpdated: result });
+};
+
 module.exports = {
   addSale,
   getAllSales,
   getSalesById,
   deleteSale,
+  updateSales,
 };
