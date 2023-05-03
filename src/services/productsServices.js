@@ -30,10 +30,16 @@ const deleteProducts = async (id) => {
   return result; 
 };
 
+const searchProduct = async (q) => {
+  const products = await productModels.searchProduct(q);
+  return products;
+};
+
 module.exports = {
   getAllProducts,
   getProductsById,
   createProducts,
   updateProducts,
   deleteProducts,
+  searchProduct,
 };
