@@ -56,13 +56,23 @@ const deleteSale = async (id) => {
 };
 
 const updateSales = async (id, name) => {
-  const result = await connection.execute(
+  await connection.execute(
     `UPDATE StoreManager.sales_products 
     SET product_id = (?), quantity = (?) WHERE sale_id = (?) AND product_id = (?);`,
-    [name.productId, id, name.quantity],
+    [name.productId, name.quantity, id, name.productId],
   );
-  console.log('linha 64', result);
+  // começar com type null, para poder validar a verificação de alteração de venda com sucesso
   return { type: null };
+};
+  
+// adicionar a consulta SQL para obter a venda antes de atualizá-la. 
+// verificar se a venda existe no banco de dados antes de atualizar
+const getSale = async (id) => {
+  const [result] = await connection.execute(
+    'SELECT * FROM StoreManager.sales_products WHERE sale_id = (?);',
+    [id],
+  );
+  return result[0];
 };
 
 module.exports = {
@@ -71,4 +81,5 @@ module.exports = {
   getSalesById,
   deleteSale,
   updateSales,
+  getSale,
 };

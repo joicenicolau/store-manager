@@ -39,15 +39,21 @@ const deleteSale = async (id) => {
 };
 
 const updateSales = async (id, name) => {
+  // console.log('linha 42', id, name);
   const wrongAnswer = await productArray(name);
-  if (wrongAnswer.type) return wrongAnswer; 
+  if (wrongAnswer.type) return wrongAnswer;
 
-  const notFound = await salesModels.getSalesById(id);
-  // console.log('linha 46', notFound);
-  if (notFound.length === 0) return { type: 404, message: 'Sale not found' };
+  const sale = await salesModels.getSale(id);
+  if (!sale) {
+    return { type: 404, message: 'Sale not found' };
+  }
 
-  const result = await salesModels.updateSales(id, name);
-  return result; 
+  // Alterar a condição para verificar se a venda existe no banco de dados antes de atualizá-la
+  const result = await Promise.all(
+    name.map((item) => salesModels.updateSales(id, item)),
+  );
+
+  return { type: null, result };
 };
 
 module.exports = {
