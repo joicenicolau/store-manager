@@ -1,4 +1,3 @@
-// pesquisa: https://github.com/tryber/sd-027-a-live-lectures/blob/lecture/back/5.5/src/services/questionService.js
 const productModels = require('../models/productsModels');
 
 const getAllProducts = async () => {

@@ -30,7 +30,6 @@ const getSalesById = async (id) => {
 
 const deleteSale = async (id) => {
   const resultByID = await salesModels.getSalesById(id);
-  // console.log('linha 34', resultByID);
   
   if (resultByID.length === 0) return { type: 404, message: 'Sale not found' };
 
@@ -39,7 +38,6 @@ const deleteSale = async (id) => {
 };
 
 const updateSales = async (id, name) => {
-  // console.log('linha 42', id, name);
   const wrongAnswer = await productArray(name);
   if (wrongAnswer.type) return wrongAnswer;
 
@@ -48,7 +46,6 @@ const updateSales = async (id, name) => {
     return { type: 404, message: 'Sale not found' };
   }
 
-  // Alterar a condição para verificar se a venda existe no banco de dados antes de atualizá-la
   const result = await Promise.all(
     name.map((item) => salesModels.updateSales(id, item)),
   );

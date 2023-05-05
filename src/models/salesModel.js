@@ -5,7 +5,6 @@ const addSales = async (sale) => {
     'INSERT INTO StoreManager.sales (date) VALUES (NOW());',
   );
 
-  // sem a mentoria do Jordan do dia 27/04 as 13h, do Ronald. Seria impossível fazer esse map e o promisse.all sozinha. Obrigada pela dica Ronald
   const promises = sale.map(({ productId, quantity }) => connection.execute(
     'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?);',
     [insertId, productId, quantity],
@@ -16,7 +15,6 @@ const addSales = async (sale) => {
   return { id: insertId, itemsSold: sale };
 };
 
-// Dica do Ronald na mentoria tb, já renomear para as chaves que preciso para não precisar usar o camelize
 const getAllSales = async () => {
   const [result] = await connection.execute(
     `SELECT 
@@ -31,7 +29,6 @@ const getAllSales = async () => {
   return result;
 };
 
-// retirei a sale_id do select, teste estava pedindo
 const getSalesById = async (id) => {
   const [result] = await connection.execute(
     `SELECT 
@@ -43,7 +40,6 @@ const getSalesById = async (id) => {
     WHERE ps.sale_id = ?;`,
     [id],
   );
-  // console.log('linha 46', result); 
   return result;
 };
 
@@ -61,12 +57,9 @@ const updateSales = async (id, name) => {
     SET product_id = (?), quantity = (?) WHERE sale_id = (?) AND product_id = (?);`,
     [name.productId, name.quantity, id, name.productId],
   );
-  // começar com type null, para poder validar a verificação de alteração de venda com sucesso
   return { type: null };
 };
   
-// adicionar a consulta SQL para obter a venda antes de atualizá-la. 
-// verificar se a venda existe no banco de dados antes de atualizar
 const getSale = async (id) => {
   const [result] = await connection.execute(
     'SELECT * FROM StoreManager.sales_products WHERE sale_id = (?);',

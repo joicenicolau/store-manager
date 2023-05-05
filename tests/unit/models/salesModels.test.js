@@ -30,7 +30,6 @@ describe('Camada Model', function () {
     it('testa se adiciona vendas novas', async function () {
       sinon.stub(connection, 'execute').resolves([{ insertId: 5 }]);
 
-      // alterei o arquivo mock, peguei outro que tem data
       const response = await salesModel.addSales(mock.resultGetSales);
 
       expect(response).to.deep.equal({ id: 5, itemsSold: mock.resultGetSales });

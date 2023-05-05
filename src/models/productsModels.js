@@ -1,17 +1,13 @@
 const connection = require('./connections');
-// console.log(connection);
 
 const getAllProducts = async () => {
-  // uam única desestruturação, pois quero todos os elementos da lista
   const [result] = await connection.execute(
     'SELECT * FROM StoreManager.products ORDER BY id;',
   );
   return result;
 };
 
-// pesquisa: https://github.com/tryber/sd-027-a-live-lectures/blob/lecture/back/5.5/src/models/userModel.js
 const getProductsById = async (id) => {
-  // dupla desestruturação, pois quero um único elemento da lista
   const [[result]] = await connection.execute(
     'SELECT * FROM StoreManager.products WHERE id = ?;',
     [id],
@@ -27,13 +23,12 @@ const createProducts = async (name) => {
   return insertId;
 };
 
-// pesquisa: course - 2.4
 const updateProducts = async (id, name) => {
   await connection.execute(
     'UPDATE StoreManager.products SET name = (?) WHERE id = (?);',
     [name, id],
   );
-  return { id, name }; // retornar direto o id e name. 
+  return { id, name }; 
 };
 
 const deleteProducts = async (id) => {
@@ -47,7 +42,8 @@ const deleteProducts = async (id) => {
 const searchProduct = async (q) => {
   console.log('search', q);
   const [result] = await connection.execute(
-    'SELECT * FROM StoreManager.products WHERE name LIKE (?);', [`${q}%`],
+    'SELECT * FROM StoreManager.products WHERE name LIKE (?);',
+    [`${q}%`],
   );
   return result;
 };

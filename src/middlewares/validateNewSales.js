@@ -1,6 +1,5 @@
 module.exports = (req, res, next) => {
   const sales = req.body;
-  // console.log(sales); 
 
   if (sales.some((sale) => !sale.productId)) {
     return res.status(400).json({ message: '"productId" is required' });

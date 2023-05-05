@@ -13,7 +13,6 @@ const getProductsById = async (req, res) => {
 
   if (!result) return res.status(404).json({ message: 'Product not found' });
 
-  // Será validado que é possível listar um produto específico com sucesso
   return res.status(200).json(result);
 };
 
@@ -31,14 +30,10 @@ const updateProducts = async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
-  // valida se um produto específico não é encontrado
   const resultByID = await productService.getProductsById(id);
-  // console.log(resultByID);
   
-  // esse diferente da sale aceitou a negação
   if (!resultByID) return res.status(404).json({ message: 'Product not found' });
   
-  // validação já pronta no middleware
   const result = await productService.updateProducts(id, name);
   
   return res.status(200).json(result);

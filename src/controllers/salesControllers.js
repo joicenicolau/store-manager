@@ -38,13 +38,11 @@ const deleteSale = async (req, res) => {
 const updateSales = async (req, res) => {
   const { id } = req.params;
   const result = await req.body;
-  // console.log('linha 41', result);
 
   const sales = await salesServices.updateSales(id, result);
 
   if (sales.type) return res.status(sales.type).json({ message: sales.message });
 
-  // Adicionar uma verificação para garantir que a venda foi alterada no banco de dados.
   if (sales.type === null) {
     return res.status(200).json({ saleId: id, itemsUpdated: result });
   }
