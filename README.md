@@ -13,22 +13,15 @@ Este projeto consistiu na criação de rotas com os métodos POST, PUT, GET e DE
 
 ## Endpoints
 
-### POST
+#### POST
+```
 /products: para registrar um novo produto.
-Corpo da requisição:
-```
-{
-  "name": "produto",
-}
-```
 
 /sales: para registrar uma nova venda.
-Corpo da requisição:
-```
-[  {    "productId": 1,    "quantity": 1  },  {    "productId": 2,    "quantity": 5  }]
 ```
 
-### GET
+#### GET
+```
 /products: para listar todos os produtos.
 
 /products/:id: para encontrar um produto pelo seu id.
@@ -38,25 +31,20 @@ Corpo da requisição:
 /sales/:id: para encontrar uma venda pelo seu id.
 
 /products/search: usando uma query "q" no endpoint, você pode pesquisar por uma palavra e encontrar todos os produtos que contêm essa palavra em seu nome. 
-```
+
 Exemplo: /products/search?q=searchTerm.
 ```
 
-### DELETE
+#### DELETE
+```
 /products/:id: para deletar um produto.
 
 /sales/:id: para deletar uma venda.
+```
 
-### PUT
+#### PUT
+```
 /products/:id: para atualizar um produto.
-Corpo da requisição:
-```
-{
-  "name": "produto",
-}
-```
+
 /sales: para atualizar uma venda.
-Corpo da requisição:
-```
-[  {    "productId": 1,    "quantity": 1  },  {    "productId": 2,    "quantity": 5  }]
 ```
